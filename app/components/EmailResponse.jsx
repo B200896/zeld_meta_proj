@@ -4,8 +4,8 @@ import Sidebar from "./Sidebar";
 import Dashboard from "./Dashboard";
 import { Table,TableBody,TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
 import Header from "./Header";
-// import { Dashboard } from "@mui/icons-material";
-// import Dashboard from "./Dashboard";
+import Link from 'next/link'
+
 const EmailResponse=()=>{
     const details=[
         {jobprofile:"Google",totalEmails:12000,positiveResponse:9000,nagativeResponse:2000,noResponse:1000},
@@ -30,8 +30,9 @@ const EmailResponse=()=>{
             <TableCell>Job Profile</TableCell>
             <TableCell>Total Emails</TableCell>
             <TableCell>No Response</TableCell>
-            <TableCell>Positive Response</TableCell>
             <TableCell>Negative Response</TableCell>
+            <TableCell>Positive Response</TableCell>
+            
             
             
           </TableRow>
@@ -42,8 +43,14 @@ const EmailResponse=()=>{
               <TableCell>{row.jobprofile}</TableCell>
               <TableCell>{row.totalEmails}</TableCell>
               <TableCell>{row.noResponse}</TableCell>
-              <TableCell>{row.positiveResponse}</TableCell>
               <TableCell>{row.nagativeResponse}</TableCell>
+              <TableCell>
+                <Link href={`components/Candidates/${row.jobprofile}`}>
+                  <span className="text-blue-500 hover:underline">{row.positiveResponse}</span>
+
+                </Link>
+              </TableCell>
+             
              
             </TableRow>
           ))}
