@@ -46,7 +46,7 @@ const EmailResponse=()=>{
               <TableCell>{row.nagativeResponse}</TableCell>
               <TableCell>
                 <Link href={`components/Candidates/${row.jobprofile}`}>
-                  <span className="text-blue-500 hover:underline">{row.positiveResponse}</span>
+                  <span className="hover:text-blue-500">{row.positiveResponse}</span>
 
                 </Link>
               </TableCell>

@@ -12,9 +12,9 @@ const Candidates = ({params}) => {
         { name: "Mohan", contact: "78677727273", linkedinprofile: "abc@linkedin", gmail: "mohan@gmail.com", jobprofile: "google" },
         { name: "Jai", contact: "909383838388", linkedinprofile: "abc@linkedin", gmail: "jai@gmail.com", jobprofile: "Samsung" },
         { name: "Fareen", contact: "83737444494", linkedinprofile: "fareen@linkedin", gmail: "fareen@gmail.com", jobprofile: "Amdocs" },
-        { name: "Ishita", contact: "868585855894", linkedinprofile: "abc@linkedin", gmail: "ishita@gmail.com", jobprofile: "Amdocs" },
+        { name: "Kajal", contact: "868585855894", linkedinprofile: "abc@linkedin", gmail: "ishita@gmail.com", jobprofile: "Amdocs" },
         { name: "Ishita", contact: "868585855894", linkedinprofile: "abc@linkedin", gmail: "ishita@gmail.com", jobprofile: "Flipkart" },
-        { name: "Ishita", contact: "868585855894", linkedinprofile: "abc@linkedin", gmail: "ishita@gmail.com", jobprofile: "Xiomi" },
+        { name: "Jaanvi", contact: "868585855894", linkedinprofile: "janvi@linkedin", gmail: "janvi@gmail.com", jobprofile: "Xiomi" },
         { name: "Ishita", contact: "868585855894", linkedinprofile: "abc@linkedin", gmail: "ishita@gmail.com", jobprofile: "Accenture" },
     ];
 
@@ -22,6 +22,7 @@ const Candidates = ({params}) => {
     const candidates = Slug
         ? candidatesList.filter(candidate => candidate.jobprofile.toLowerCase() === Slug.toLowerCase()) 
         : [];
+        console.log("candidate",candidates)
 
     return (
         <div>
@@ -40,11 +41,11 @@ const Candidates = ({params}) => {
                 <tbody>
                     {candidates.map((candidate, index) => (
                         <tr key={index}>
-                            <td style={{ border: "1px solid #ddd", padding: "8px" }}>{candidate.name}</td>
-                            <td style={{ border: "1px solid #ddd", padding: "8px" }}>{candidate.contact}</td>
-                            <td style={{ border: "1px solid #ddd", padding: "8px" }}>{candidate.linkedinprofile}</td>
-                            <td style={{ border: "1px solid #ddd", padding: "8px" }}>{candidate.gmail}</td>
-                            <td style={{ border: "1px solid #ddd", padding: "8px" }}>{candidate.jobprofile}</td>
+                            <td style={{ border: "1px solid #ddd", padding: "8px", textAlign:"center"}}>{candidate.name}</td>
+                            <td style={{ border: "1px solid #ddd", padding: "8px",textAlign:"center" }}>{candidate.contact}</td>
+                            <td style={{ border: "1px solid #ddd", padding: "8px",textAlign:"center"}}>{candidate.linkedinprofile}</td>
+                            <td style={{ border: "1px solid #ddd", padding: "8px",textAlign:"center"}}>{candidate.gmail}</td>
+                            <td style={{ border: "1px solid #ddd", padding: "8px",textAlign:"center" }}>{candidate.jobprofile}</td>
                         </tr>
                     ))}
                 </tbody>
