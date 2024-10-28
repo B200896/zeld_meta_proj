@@ -1,10 +1,9 @@
-// pages/candidates.js
 import { useEffect, useState } from 'react';
 
 const Candidates = () => {
   const [jobs, setJobs] = useState([]);
+  const [selectedCandidates, setSelectedCandidates] = useState([]);
 
-  // Fetch data from the API endpoint
   useEffect(() => {
     fetch('/api/jobs')
       .then((response) => response.json())
@@ -12,10 +11,11 @@ const Candidates = () => {
       .catch((error) => console.error('Error fetching jobs:', error));
   }, []);
 
-  // Function to handle the Find Candidates button click
   const handleFindCandidates = (jobTitle) => {
-    console.log(`Finding candidates for ${jobTitle}`);
-    // Add any additional logic here, e.g., navigate to details or open a modal
+    fetch(`/api/candidates?jobTitle=${jobTitle}`)
+      .then((response) => response.json())
+      .then((data) => setSelectedCandidates(data))
+      .catch((error) => console.error('Error fetching candidates:', error));
   };
 
   return (
@@ -53,11 +53,21 @@ const Candidates = () => {
           ))}
         </tbody>
       </table>
+      
+      {selectedCandidates.length > 0 && (
+        <div style={{ marginTop: '20px' }}>
+          <h2>Matching Candidates</h2>
+          <ul>
+            {selectedCandidates.map((candidate, index) => (
+              <li key={index}>{candidate.name} - {candidate.email}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
 
-// Styling for table elements
 const styles = {
   th: {
     border: '1px solid #ddd',
@@ -74,7 +84,7 @@ const styles = {
     transition: 'background-color 0.2s',
   },
   button: {
-    backgroundColor: '#4CAF50', // Green
+    backgroundColor: '#4CAF50',
     color: 'white',
     padding: '5px 10px',
     border: 'none',
