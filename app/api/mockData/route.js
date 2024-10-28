@@ -1,4 +1,4 @@
-const jobsDatabase = [
+const mockData = [
     {
       serialNo: "1",
       logo: "/images/brand/brand-01.svg",
@@ -45,4 +45,6 @@ const jobsDatabase = [
       hiringManagerEmail: "design.hiring@facebook.com"
     },
   ];
-export default jobsDatabase;
+export async function GET(req){
+    return new Response(JSON.stringify(mockData),{status:200})
+}
