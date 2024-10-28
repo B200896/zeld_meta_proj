@@ -2,8 +2,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import React from "react";
-import Navbar from "./components/Navbar";
-
 export default function Home() {
   return (
    /* <div className={styles.page}>
@@ -96,7 +94,8 @@ export default function Home() {
     </div>*/
     <>
     <h1>Harsh jain</h1>
-    <Navbar />
+    <button>Candidates</button>
+
     </>
 
   );
