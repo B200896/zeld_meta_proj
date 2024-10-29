@@ -12,10 +12,11 @@ const Candidates = () => {
   }, []);
 
   const handleFindCandidates = (jobTitle) => {
-    fetch(`/api/candidates?jobTitle=${jobTitle}`)
+    fetch(`/api/candidatess?jobTitle=${jobTitle}`)
       .then((response) => response.json())
-      .then((data) => setSelectedCandidates(data))
+      .then((data) =>setSelectedCandidates(data))
       .catch((error) => console.error('Error fetching candidates:', error));
+    
   };
 
   return (
@@ -59,7 +60,7 @@ const Candidates = () => {
           <h2>Matching Candidates</h2>
           <ul>
             {selectedCandidates.map((candidate, index) => (
-              <li key={index}>{candidate.name} - {candidate.email}</li>
+              <li key={index}>{candidate.name} - {candidate.email} <button>Send email</button></li>
             ))}
           </ul>
         </div>
