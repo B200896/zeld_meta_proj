@@ -33,11 +33,13 @@ const MainPage = () => {
                                 Hiring
                             </button>
                         </Link>
+                        <Link href="/components/Hiring">
                         <button type="submit"
                          className="w-60 h-16 px-5 py-3 mb-60 font-bold text-bold cursor-pointer bg-purple-600 text-white border-none rounded-lg ml-10">
                             Candidates
 
                         </button>
+                        </Link>
 
                     </div>
                 </div>
