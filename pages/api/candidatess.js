@@ -2,7 +2,7 @@
 
 export default function handler(req, res) {
     const { jobTitle } = req.query;
-    console.log(jobTitle);
+   // console.log(jobTitle);
     // Mock data for candidates
     const allCandidates = [
       { name: "Alice", email: "alice@example.com", jobTitle: "Senior React Developer"},
@@ -10,8 +10,13 @@ export default function handler(req, res) {
       { name: "Bob", email: "bob@example.com", jobTitle: "Full Stack Engineer" },
       { name: "Charlie", email: "charlie@example.com", jobTitle: "Node.js Engineer" },
       { name: "David", email: "david@example.com", jobTitle: "DevOps Engineer" },
-      { name: "Eve", email: "eve@example.com", jobTitle: "UI/UX Designer" },
-      { name: "Evei", email: "evei@example.com", jobTitle: "UI/UX Designer" },
+      { name: "Eve", email: "eve@example.com", jobTitle: "Senior UI/UX Designer" },
+      { name: "Evei", email: "evei@example.com", jobTitle: "Senior UI/UX Designer" },
+      { name: "Harsh", email: "evei@example.com", jobTitle: "DevOps Engineer" },
+      { name: "Jenny", email: "evei@example.com", jobTitle: "DevOps Engineer" },
+      { name: "Rahul", email: "evei@example.com", jobTitle: "Full Stack Engineer" },
+    
+      
 
     ];
   
