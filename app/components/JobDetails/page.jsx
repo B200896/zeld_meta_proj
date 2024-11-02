@@ -19,11 +19,14 @@ import {
   } from '@mui/material';
   import Header from '../Header';
   import Sidebar from '../Sidebar';
-  const {GoogleGenerativeAI} = require("@google/generative-ai")
-  const genAI= new GoogleGenerativeAI(process.env.API_KEY)
-  console.log("apikey",process.env.API_KEY)
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   require('dotenv').config();
+  const {GoogleGenerativeAI} = require("@google/generative-ai")
+  const genAI= new GoogleGenerativeAI("AIzaSyBwLUxR9evHotlSVpD6lzWi7I0wDF6M6UY")
+  console.log("genAI",genAI)
+  // console.log("sss",process.env.API_KEY)
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+console.log("model",model)
+ 
 const JobDetails = () => {
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -51,7 +54,59 @@ const JobDetails = () => {
       };
       fetchJobs();
     }, []);
+    const generateResponse = async (job) => {
+      console.log("jobcompany", job);
+      const { company, jobTitle } = job;
   
+      const prompt = `
+      Generate a professional email template for a recruiter reaching out to a hiring manager about a job position. Use these details:
+      
+      Company: ${company}
+      Position: ${jobTitle}
+      Role Type: ${job.jobRole}
+      Job Description: ${job.jobDescription}
+      Hiring Manager Email: ${job.hiringManagerEmail}
+      
+      Follow these guidelines:
+      1. Start with "Dear ${company} Hiring Team," (don't use any individual's name)
+      2. Keep it professional and concise
+      3. Mention having pre-screened candidates matching their requirements
+      4. Highlight 2-3 key technical skills specifically relevant to ${job.jobRole}
+      5. Emphasize quality over quantity of candidates
+      6. Ask about reviewing candidate profiles
+      7. Maintain a warm but professional tone
+      8. Don't use any placeholder text like [Your name] or [Recruiter name]
+      9. Don't mention specific numbers of candidates
+      10. End with "Best regards," or similar closing (signature will be added automatically)
+      
+      Important: Generate a complete email ready to send, without any placeholders. Do not include a signature as it will be added automatically.`;
+  
+      console.log("prompt", prompt);
+  
+      try {
+          // Adjust the request payload according to the API documentation
+          const requestBody = {
+              contents: [{
+                  parts: [{
+                      text: prompt
+                  }]
+              }]
+          };
+  
+          const response = await model.generateContent(requestBody);
+          console.log("AI Response:", response);
+          console.log("response",response.response.candidates[0].content.parts[0].text)
+  
+          // Extract and return the generated text from the response
+          return response.response.candidates[0].content.parts[0].text || "Generated text not found"; // Adjust based on actual response structure
+      } catch (error) {
+          console.error("Error generating response:", error);
+          return "Error generating email template."; // Fallback message
+      }
+  };
+  
+    
+      
     const handleOpenModal = async (job) => {
         console.log("job",job)
       setSelectedJob({
@@ -65,35 +120,7 @@ const JobDetails = () => {
       setOpenModal(true);
     };
   
-    const generateResponse = async (job) => {
-        const { company, jobTitle } = job;
-        
-        const senderName = "James Wilson"; 
-        const senderPosition = "Frontend Architect"; 
-        const senderEmail = "jwilson@innovatetech.net"; 
-      
-        const prompt = `
-          Dear ${company} Hiring Team,
-          
-          I'm writing regarding your ${jobTitle} position at ${company}. We currently have several exceptional frontend developers in our talent pool who would be perfect matches for this role.
-          
-          Our candidates have strong backgrounds in React and modern frontend development, with proven track records in developing scalable web applications using React, Next.js, and other cutting-edge technologies. What particularly interested us about your role was ${company}'s commitment to innovation and user experience, which aligns perfectly with our candidates' expertise.
-          
-          We'd love to connect you with these pre-screened candidates who are actively seeking opportunities like yours. They all have the technical skills you're looking for and would be valuable additions to your team.
-          
-          Would you be interested in reviewing their profiles? We can quickly provide you with detailed information about candidates who match your specific requirements.
-          
-          Looking forward to your response,
-          
-          ${senderName} 
-          ${senderPosition}
-          ${senderEmail}
-        `;
-        console.log("promt",prompt)
-        return prompt;
-      
-      };
-      
+   
   
     const handleClose = () => {
       setOpenModal(false);
