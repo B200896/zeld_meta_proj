@@ -14,6 +14,7 @@ function  Sidebar () {
           <li><a href="#" className="block py-2">Tables</a></li>
           <li><a href="#" className="block py-2">Pages</a></li>
         </ul>
+        {/* <button type="button">hiring</button> */}
       </div>
 
       
